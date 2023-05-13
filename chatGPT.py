@@ -88,23 +88,24 @@ while True:
         response = chat_with_gpt(prompt)
 
         try:   
+            # limit retry
             for i in range(0,2):
               print("AI:", response)
-              print("AI:", extract_numbers(response))
               move = extract_numbers(response) - 1
               if board[move] != ' ':
                   print("Move already chosen, how would AI take over the world if you can't win in tic tac toe?, regenerating response")
-                  prompt = "{0} had already been chosen. chose another number".format(selectedNumbers)
+                  prompt = "{0} had already been chosen. choose another number".format(selectedNumbers)
                   print(prompt)
                   response = chat_with_gpt(prompt)
                   continue
+              else:
+                break
                 
             if board[move] != ' ':
               print("ChatGPT's response was not a valid move! The game is interrupted.")
               break
             board[move] = ai_symbol
             selectedNumbers.append(move+1)
-            print(selectedNumbers)
 
             player_turn *= -1
 
