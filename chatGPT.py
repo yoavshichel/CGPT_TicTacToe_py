@@ -1,9 +1,10 @@
 import random
 import openai
 import re
+import os
 
 # Set up your OpenAI API credentials
-openai.api_key = ''
+openai.api_key = os.environ.get('GPT_API')
 
 # Define a function to interact with the ChatGPT model
 def chat_with_gpt(prompt):
